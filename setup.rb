@@ -14,7 +14,7 @@ end
 
 dep 'xinetd.managed' do
   installs 'xinetd'
-  provides ['inet-superserver']
+  provides []
 end
 
 dep 'dash' do
