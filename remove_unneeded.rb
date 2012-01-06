@@ -3,6 +3,9 @@ meta :remove do
   template {
     met? { which(executable).blank? }
     meet { log_shell "Removing #{basename}", "apt-get -q -y remove --purge #{basename}", :sudo => true }
+    after {
+      log_shell "Autoremoving packages", "apt-get -y autoremove", :sudo => true
+    }
   }
 end
 

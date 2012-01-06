@@ -3,6 +3,18 @@ dep 'system update' do
   log_shell 'Upgrade', "apt-get upgrade", :sudo => true
 end
 
+dep 'dash.managed' do
+  installs 'dash'
+end
+
+dep 'dropbear.managed' do
+  installs 'dropbear'
+end
+
+dep 'xinetd.managed' do
+  installs 'xinetd'
+end
+
 dep 'dash' do
   requires 'dash.managed'
   sudo("rm -f /bin/sh")
