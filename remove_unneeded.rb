@@ -1,7 +1,7 @@
 meta :remove do
   accepts_list_for :executable
   template {
-    met? { puts which(executable) }
+    met? { which(executable).present? }
     meet { log_shell "Removing #{basename}", "apt-get -q -y remove --purge #{basename}", :sudo => true }
   }
 end
