@@ -6,3 +6,5 @@ meta :remove do
 end
 
 dep 'portmap.remove'
+dep 'rsyslog.remove'
+dep 'nscd.remove'

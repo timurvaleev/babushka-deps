@@ -31,4 +31,7 @@ end
 
 dep 'setup' do
   requires 'system update'
+  requires 'portmap.remove'
+  requires 'rsyslog.remove'
+  requires 'nscd.remove'
 end
