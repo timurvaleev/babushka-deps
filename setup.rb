@@ -14,7 +14,7 @@ end
 
 dep 'xinetd.managed' do
   installs 'xinetd'
-  provides ['/etc/init.d/xinetd']
+  provides ['/usr/sbin/xinetd']
 end
 
 dep 'dash' do
