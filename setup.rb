@@ -9,11 +9,12 @@ end
 
 dep 'dropbear.managed' do
   installs 'dropbear'
-  provides %w[dropbearkey]
+  provides ['dropbearkey']
 end
 
 dep 'xinetd.managed' do
   installs 'xinetd'
+  provides ['/etc/init.d/xinetd']
 end
 
 dep 'dash' do
