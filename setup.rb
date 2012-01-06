@@ -25,11 +25,10 @@
 #    fi
 #}
 dep 'system update' do
-  sudo(`apt-get update`)
-  sudo(`apt-get upgrade -y -q`)
+  sudo("apt-get update")
+  sudo("apt-get upgrade -y -q")
 end
 
 dep 'setup' do
   requires 'system update'
-  requires 'remove portmap'
 end
