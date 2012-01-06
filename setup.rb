@@ -14,7 +14,7 @@ end
 
 dep 'xinetd.managed' do
   installs 'xinetd'
-  provides ['/usr/sbin/xinetd']
+  provides ['inet-superserver']
 end
 
 dep 'dash' do
