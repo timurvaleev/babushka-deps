@@ -14,7 +14,7 @@ dep 'sshd_not_to_be_run' do
   meet { sudo("touch /etc/ssh/sshd_not_to_be_run") }
 end
 
-dep 'dropbear'
+dep 'dropbear' do
   requires 'dropbear.managed'
   requires 'xinetd.managed'
   requires 'sshd_not_to_be_run'
