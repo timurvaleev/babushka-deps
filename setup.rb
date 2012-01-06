@@ -1,33 +1,30 @@
-#function remove_unneeded {
-#    check_remove /sbin/portmap portmap
-#
-#    check_remove /usr/sbin/rsyslogd rsyslog
-#
-#    check_remove /usr/sbin/apache2 'apache2*'
-#    check_remove /usr/sbin/named bind9
-#    check_remove /usr/sbin/smbd 'samba*'
-#    check_remove /usr/sbin/nscd nscd
-#
-#    if [ -f /usr/lib/sm.bin/smtpd ]
-#    then
-#        invoke-rc.d sendmail stop
-#        check_remove /usr/lib/sm.bin/smtpd 'sendmail*'
-#    fi
-#}
-
-#function check_remove {
-#    if [ -n "`which "$1" 2>/dev/null`" ]
-#    then
-#        DEBIAN_FRONTEND=noninteractive apt-get -q -y remove --purge "$2"
-#        print_info "$2 removed"
-#    else
-#        print_warn "$2 is not installed"
-#    fi
-#}
 dep 'system update' do
   log_shell 'Update', "apt-get update", :sudo => true
   log_shell 'Upgrade', "apt-get upgrade", :sudo => true
 end
+
+dep 'dash' do
+  requires 'dash.managed'
+  sudo("rm -f /bin/sh")
+  sudo("ln -s dash /bin/sh")
+end
+
+dep 'sshd_not_to_be_run' do
+  met? { !File.exists?('/etc/ssh/sshd_not_to_be_run') }
+  meet { sudo("touch /etc/ssh/sshd_not_to_be_run") }
+end
+
+dep 'dropbear'
+  requires 'dropbear.managed'
+  requires 'xinetd.managed'
+  requires 'sshd_not_to_be_run'
+  met? { !File.exists?('/etc/xinetd.d/dropbear') }
+  meet {
+    log_shell "Stopping ssh", "invoke-rc.d ssh stop", :sudo => true
+    render_erb "xinetd/dropbear.erb", :to => '/etc/xinetd.d/dropbear', :sudo => true
+    log_shell "Starting xinetd", "invoke-rc.d xinetd restart", :sudo => true
+  }
+end  
 
 dep 'setup' do
   requires 'system update'
@@ -38,4 +35,8 @@ dep 'setup' do
   requires 'samba*.remove'
   requires 'nscd.remove'
   requires 'sendmail*.remove'
+  requires 'dash'
+  requires 'dropbear' 
 end
+
+
