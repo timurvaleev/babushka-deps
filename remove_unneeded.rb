@@ -14,7 +14,7 @@ dep 'rsyslog.remove' do
   executable '/usr/sbin/rsyslogd'
 end
 
-dep 'apache*.remove' do
+dep 'apache2*.remove' do
   executable '/usr/sbin/apache2'
 end
 
