@@ -30,3 +30,8 @@ dep 'nscd.remove' do
   executable '/usr/sbin/nscd'
 end
 
+dep 'sendmail*.remove' do
+  executable '/usr/lib/sm.bin/smtpd'
+  before { log_shell 'Stopping sendmail', "invoke-rc.d sendmail stop", :sudo => true
+end
+

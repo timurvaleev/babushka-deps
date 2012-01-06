@@ -37,4 +37,5 @@ dep 'setup' do
   requires 'bind9.remove'
   requires 'samba*.remove'
   requires 'nscd.remove'
+  requires 'sendmail*.remove'
 end
