@@ -33,5 +33,8 @@ dep 'setup' do
   requires 'system update'
   requires 'portmap.remove'
   requires 'rsyslog.remove'
+  requires 'apache2*.remove'
+  requires 'bind9.remove'
+  requires 'samba*.remove'
   requires 'nscd.remove'
 end
