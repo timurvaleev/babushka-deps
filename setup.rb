@@ -25,8 +25,8 @@
 #    fi
 #}
 dep 'system update' do
-  sudo("apt-get update")
-  sudo("apt-get upgrade -y -q")
+  log_shell 'Update', "apt-get update", :sudo => true
+  log_shell 'Upgrade', "apt-get upgrade", :sudo => true
 end
 
 dep 'setup' do
