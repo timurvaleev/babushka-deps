@@ -26,7 +26,7 @@ dep 'samba*.remove' do
   executable '/usr/sbin/smbd'
 end
 
-dep 'nscd.remove'
+dep 'nscd.remove' do
   executable '/usr/sbin/nscd'
 end
 
