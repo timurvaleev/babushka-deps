@@ -9,6 +9,7 @@ end
 
 dep 'dropbear.managed' do
   installs 'dropbear'
+  provides %w[dropbear]
 end
 
 dep 'xinetd.managed' do
